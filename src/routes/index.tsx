@@ -1,4 +1,4 @@
-import { component$, useStylesScoped$ } from "@builder.io/qwik";
+import { component$, useSignal, useStylesScoped$ } from "@builder.io/qwik";
 import { type DocumentHead, loader$ } from "@builder.io/qwik-city";
 import { type Product, products } from "./productsDB";
 import indexCSS from "./index.css?inline";
@@ -9,12 +9,20 @@ export const productsLoader = loader$(() => {
 });
 
 export default component$(() => {
+  const filterSignal = useSignal("");
   useStylesScoped$(indexCSS);
   const productsSignal = productsLoader.use();
   return (
     <div>
+      <input
+        placeholder="Search"
+        value={filterSignal.value}
+        onInput$={(e) =>
+          (filterSignal.value = (e.target as HTMLInputElement).value)
+        }
+      />
       <ul>
-        {productsSignal.value.map((product) => (
+        {productsSignal.value.filter(predicate).map((product) => (
           <li>
             <ProductCmp product={product} />
           </li>
@@ -22,6 +30,13 @@ export default component$(() => {
       </ul>
     </div>
   );
+
+  function predicate(product: Product) {
+    if (filterSignal.value == "") return true;
+    return product.name
+      .toLowerCase()
+      .includes(filterSignal.value.toLowerCase());
+  }
 });
 
 export const head: DocumentHead = {
