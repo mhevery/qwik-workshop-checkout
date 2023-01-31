@@ -10,7 +10,7 @@ export const login = action$(({ username, password }, { redirect, cookie}) => {
     if (user) {
         if (user.password === password) {
             updateAuthCookie(cookie, user);
-            throw redirect(302, "/");
+            throw redirect(301, "/");
         }
     }
 });

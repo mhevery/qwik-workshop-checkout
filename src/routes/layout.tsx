@@ -1,12 +1,13 @@
 import { component$, Slot } from '@builder.io/qwik';
 import Header from '../components/header/header';
-import {RequestHandler} from "@builder.io/qwik-city";
-import {getAuthenticationFromCookie} from "~/services/authenticationService";
+import { RequestHandler } from "@builder.io/qwik-city";
+import { getAuthenticationFromCookie } from "~/services/authenticationService";
 
 export const onGet: RequestHandler = async ({ redirect, cookie }) => {
     const user = getAuthenticationFromCookie(cookie);
+    console.log('current user: ', user, !user);
     if (!user) {
-        throw redirect(301,'/login', );
+        throw redirect(301,'/login');
     }
 };
 
