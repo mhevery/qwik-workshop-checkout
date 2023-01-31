@@ -2,3 +2,8 @@ ul {
   list-style-type: none;
   padding: 0;
 }
+
+.cart {
+  position: relative;
+  float: right;
+}
