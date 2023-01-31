@@ -1,16 +1,29 @@
-import { component$, useSignal, useStylesScoped$ } from "@builder.io/qwik";
+import {component$, useClientEffect$, useSignal, useStylesScoped$} from "@builder.io/qwik";
 import { type DocumentHead, loader$, Form } from "@builder.io/qwik-city";
-import { type Product, products } from "./productsDB";
+import { type Product, products } from "~/data/productsDB";
 import indexCSS from "./index.css?inline";
 import productCSS from "./product.css?inline";
 import { addToCartAction } from "./cart";
 import { currencyFormat } from "./utils";
+import { getAuthenticationFromCookie } from "~/services/authenticationService";
 
 export const productsLoader = loader$(() => {
   return products;
 });
 
+export const authenticationLoader = loader$(({ cookie }) => {
+    return getAuthenticationFromCookie(cookie);
+});
+
 export default component$(() => {
+    const authLoaderSignal = authenticationLoader.use();
+
+    useClientEffect$(() => {
+        if (!authLoaderSignal.value) {
+            location.href = '/login';
+        }
+    });
+
   const filterSignal = useSignal("");
   useStylesScoped$(indexCSS);
   const productsSignal = productsLoader.use();

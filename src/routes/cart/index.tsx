@@ -7,7 +7,7 @@ import {
   type Cookie,
 } from "@builder.io/qwik-city";
 import { z } from "zod";
-import { products, type Product } from "../productsDB";
+import { products, type Product } from "~/data/productsDB";
 import { currencyFormat } from "../utils";
 
 export interface CartItem {
