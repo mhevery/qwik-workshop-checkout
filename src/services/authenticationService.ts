@@ -21,5 +21,5 @@ export const logout = action$(({}, { cookie}) => {
 });
 
 export function updateAuthCookie(cookie: Cookie, user: User | string) {
-    cookie.set("authUser", user);
+    cookie.set("authUser", user, { secure: true, path: '/' });
 }
