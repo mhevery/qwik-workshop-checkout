@@ -28,6 +28,11 @@ export default component$(() => {
             Tutorials
           </a>
         </li>
+        <li>
+          <a>
+            Logout
+          </a>
+        </li>
       </ul>
     </header>
   );
