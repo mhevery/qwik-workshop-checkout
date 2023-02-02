@@ -5,9 +5,8 @@ import { getAuthenticationFromCookie } from "~/services/authenticationService";
 
 export const onGet: RequestHandler = async ({ redirect, cookie }) => {
     const user = getAuthenticationFromCookie(cookie);
-    console.log('current user: ', user, !user);
     if (!user) {
-        throw redirect(301,'/login');
+        throw redirect(302,'/login');
     }
 };
 

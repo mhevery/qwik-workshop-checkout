@@ -1,8 +1,9 @@
 import { users, User } from '~/data/usersDB';
-import { action$, Cookie } from '@builder.io/qwik-city';
+import {action$, Cookie} from '@builder.io/qwik-city';
 
 export function getAuthenticationFromCookie(cookie: Cookie): User | undefined {
-    return cookie.get("authUser")?.json() || undefined;
+    const authCookie = cookie.get("authUser");
+    return authCookie?.json() || undefined;
 }
 
 export const login = action$(({ username, password }, { redirect, cookie}) => {
@@ -10,7 +11,7 @@ export const login = action$(({ username, password }, { redirect, cookie}) => {
     if (user) {
         if (user.password === password) {
             updateAuthCookie(cookie, user);
-            throw redirect(301, "/");
+            throw redirect(308, "/");
         }
     }
 });
