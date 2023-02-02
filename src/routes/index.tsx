@@ -1,10 +1,8 @@
 import {component$, useSignal, useStylesScoped$} from "@builder.io/qwik";
-import {type DocumentHead, loader$, Form} from "@builder.io/qwik-city";
+import {type DocumentHead, loader$} from "@builder.io/qwik-city";
 import { type Product, products } from "~/data/productsDB";
+import { ProductCmp } from "~/components/product/product";
 import indexCSS from "./index.css?inline";
-import productCSS from "./product.css?inline";
-import { addToCartAction } from "./cart";
-import { currencyFormat } from "./utils";
 
 export const productsLoader = loader$(() => {
   return products;
@@ -54,20 +52,3 @@ export const head: DocumentHead = {
   ],
 };
 
-export const ProductCmp = component$<{ product: Product }>(({ product }) => {
-  useStylesScoped$(productCSS);
-  const addToCart = addToCartAction.use();
-  return (
-    <div>
-      <h2>
-        <img src={product.image} />
-        {product.name} ({currencyFormat(product.price)})
-      </h2>
-      <h3>{product.description}</h3>
-      <Form action={addToCart}>
-        <input type="hidden" name="id" value={product.id} />
-        <button type="submit">Buy</button>
-      </Form>
-    </div>
-  );
-});

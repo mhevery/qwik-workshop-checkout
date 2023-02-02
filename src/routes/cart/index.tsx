@@ -1,4 +1,4 @@
-import { component$ } from "@builder.io/qwik";
+import {component$, useStylesScoped$} from "@builder.io/qwik";
 import {
   action$,
   type DocumentHead,
@@ -9,6 +9,8 @@ import {
 import { z } from "zod";
 import { products, type Product } from "~/data/productsDB";
 import { currencyFormat } from "../utils";
+import { CartItemCmp } from "~/components/cart/cartItem";
+import indexCSS from "./index.css?inline";
 
 export interface CartItem {
   productId: string;
@@ -55,17 +57,18 @@ export function getCartItemsFromCookie(cookie: Cookie): CartItem[] {
 }
 
 export default component$(() => {
+    useStylesScoped$(indexCSS);
   const cartSignal = cartLoader.use();
   return (
     <div>
       <h1>Cart</h1>
-      <div>
+      <ul>
         {cartSignal.value.map((item) => (
           <li>
             <CartItemCmp item={item} />
           </li>
         ))}
-      </div>
+      </ul>
       <div>
         <div class="total">
           {currencyFormat(
@@ -79,21 +82,6 @@ export default component$(() => {
     </div>
   );
 });
-
-export const CartItemCmp = component$<{ item: ResolvedCartItem }>(
-  ({ item }) => (
-    <div class="cartItem">
-      <div class="qty">({item.qty})</div>
-      <div class="">
-        {item.product.name}
-        <div class="description">{item.product.description} </div>
-      </div>
-      <div class="price">{currencyFormat(item.product.price)}</div>
-      <div class="total">{currencyFormat(item.product.price)}</div>
-      <Payment />
-    </div>
-  )
-);
 
 export const head: DocumentHead = ({ getData }) => {
   return {
