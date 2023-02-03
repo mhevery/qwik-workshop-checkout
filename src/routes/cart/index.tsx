@@ -1,18 +1,18 @@
 import { component$, useStylesScoped$ } from "@builder.io/qwik";
 import {
-  action$,
-  loader$,
-  zod$,
-  type Cookie,
-  type DocumentHead,
+    action$,
+    loader$,
+    zod$,
+    type Cookie,
+    type DocumentHead,
 } from "@builder.io/qwik-city";
 import { z } from "zod";
 import { CartItemCmp } from "~/components/cart/cartItem";
 import { products, type Product } from "~/data/productsDB";
 import { currencyFormat } from "../utils";
 import indexCSS from "./index.css?inline";
-import { Payment } from "./payment";
-export { paymentLoader } from "./payment";
+import { Index } from "../payment";
+export { paymentLoader } from "../payment";
 
 export interface CartItem {
   productId: string;
@@ -81,7 +81,7 @@ export default component$(() => {
           )}
         </div>
       </div>
-      <Payment />
+        <button onClick$={() => { location.href = '/payment' }}>Pay</button>
     </div>
   );
 });

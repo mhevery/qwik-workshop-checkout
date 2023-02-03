@@ -1,6 +1,6 @@
 import { component$, useStylesScoped$ } from "@builder.io/qwik";
 import { action$, Form, loader$ } from "@builder.io/qwik-city";
-import CSS from "./payment.css?inline";
+import CSS from "./index.css?inline";
 
 interface PaymentForm {
   cardHolderName: string;
@@ -15,7 +15,7 @@ export const paymentLoader = loader$(() => {
 
 export const purchaseAction = action$(() => {});
 
-export const Payment = component$(() => {
+export default component$(() => {
   useStylesScoped$(CSS);
   const purchase = purchaseAction.use();
   purchase.run(null as any);
