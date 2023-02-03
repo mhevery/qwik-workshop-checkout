@@ -1,9 +1,11 @@
 import { component$, useStylesScoped$ } from '@builder.io/qwik';
 import { QwikLogo } from '../icons/qwik';
 import styles from './header.css?inline';
+import { logout } from '~/services/authenticationService';
 
 export default component$(() => {
   useStylesScoped$(styles);
+  const logoutAction = logout.use();
 
   return (
     <header>
@@ -29,7 +31,7 @@ export default component$(() => {
           </a>
         </li>
         <li>
-          <a>
+          <a onClick$={async () => { await logoutAction.run({}); }}>
             Logout
           </a>
         </li>
