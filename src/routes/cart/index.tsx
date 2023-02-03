@@ -1,16 +1,18 @@
-import {component$, useStylesScoped$} from "@builder.io/qwik";
+import { component$, useStylesScoped$ } from "@builder.io/qwik";
 import {
   action$,
-  type DocumentHead,
   loader$,
   zod$,
   type Cookie,
+  type DocumentHead,
 } from "@builder.io/qwik-city";
 import { z } from "zod";
+import { CartItemCmp } from "~/components/cart/cartItem";
 import { products, type Product } from "~/data/productsDB";
 import { currencyFormat } from "../utils";
-import { CartItemCmp } from "~/components/cart/cartItem";
 import indexCSS from "./index.css?inline";
+import { Payment } from "./payment";
+export { paymentLoader } from "./payment";
 
 export interface CartItem {
   productId: string;
@@ -57,7 +59,7 @@ export function getCartItemsFromCookie(cookie: Cookie): CartItem[] {
 }
 
 export default component$(() => {
-    useStylesScoped$(indexCSS);
+  useStylesScoped$(indexCSS);
   const cartSignal = cartLoader.use();
   return (
     <div>
@@ -79,6 +81,7 @@ export default component$(() => {
           )}
         </div>
       </div>
+      <Payment />
     </div>
   );
 });
@@ -94,7 +97,3 @@ export const head: DocumentHead = ({ getData }) => {
     ],
   };
 };
-
-export const Payment = component$(() => {
-  return <div>Payment</div>;
-});
