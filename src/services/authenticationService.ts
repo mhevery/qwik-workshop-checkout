@@ -18,6 +18,7 @@ export const login = action$(({ username, password }, { redirect, cookie }) => {
 });
 
 export const logout = action$(({}, { redirect, cookie }) => {
+  console.log("Logout");
   updateAuthCookie(cookie, "");
   throw redirect(308, "/login");
 });
