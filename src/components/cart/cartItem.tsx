@@ -1,21 +1,26 @@
 import { component$, useStylesScoped$ } from "@builder.io/qwik";
-import { PlusMinus } from "~/components/plusMinus/plusMinus";
-import { type ResolvedCartItem } from "~/routes/cart";
+import { PlusMinus } from "~/components/plusMinus/plus-minus";
+import {type ResolvedCartItem, updateCountAction} from "~/routes/cart";
 import { currencyFormat } from "~/routes/utils";
 import indexCSS from "./cartItem.css?inline";
 
-export const CartItemCmp = component$<{ item: ResolvedCartItem }>(
-  ({ item }) => {
+interface CartItemCmpProps {
+    item: ResolvedCartItem;
+}
+
+export const CartItemCmp = component$(
+  ({ item }: CartItemCmpProps) => {
     useStylesScoped$(indexCSS);
+    const updateAction = updateCountAction.use();
     return (
       <div class="cartItem">
         <h2>
-          <img src={item.product.image} />
+          <img src={item.product.image} alt={`${item.product.name} image`} />
           {item.product.name}
         </h2>
         <h3>{item.product.description}</h3>
         <div class="qty">
-          <PlusMinus qty={item.qty} id={item.productId} />
+          <PlusMinus qty={item.qty} id={item.productId} updateAction={updateAction} />
         </div>
         <div class="">
           {item.product.name}

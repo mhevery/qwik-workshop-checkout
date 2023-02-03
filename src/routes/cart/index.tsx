@@ -124,7 +124,10 @@ export default component$(() => {
 
 export const head: DocumentHead = ({ getData }) => {
   return {
-    title: "Your cart has " + getData(cartLoader).length + " items",
+    title: "Your cart has " + getData(cartLoader).reduce(
+        (sum, item) => sum + item.qty,
+        0
+    ) + " items",
     meta: [
       {
         name: "description",
