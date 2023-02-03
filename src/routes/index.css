@@ -1,3 +1,15 @@
+section {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 0;
+  justify-content: space-between;
+}
+
+section input {
+  width: 300px;
+}
+
 ul {
   list-style-type: none;
   padding: 0;
@@ -12,6 +24,6 @@ ul li {
 }
 
 .cart {
-  position: relative;
-  float: right;
+  width: 150px;
+  text-align: right;
 }

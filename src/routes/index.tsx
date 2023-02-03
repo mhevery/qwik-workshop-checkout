@@ -14,16 +14,18 @@ export default component$(() => {
   const productsSignal = productsLoader.use();
   return (
     <div>
-      <div class="cart">
-        [ <a href="/cart/">cart</a> ]
-      </div>
-      <input
-        placeholder="Search"
-        value={filterSignal.value}
-        onInput$={(e) =>
-          (filterSignal.value = (e.target as HTMLInputElement).value)
-        }
-      />
+        <section>
+            <input
+                placeholder="Search"
+                value={filterSignal.value}
+                onInput$={(e) =>
+                    (filterSignal.value = (e.target as HTMLInputElement).value)
+                }
+            />
+            <div class="cart">
+                [ <a href="/cart/">cart</a> ]
+            </div>
+        </section>
       <ul>
         {productsSignal.value.filter(predicate).map((product) => (
           <li>

@@ -79,9 +79,10 @@ export default component$(() => {
               0
             )
           )}
+            <button onClick$={() => { location.href = '/payment' }}>Checkout & Pay</button>
         </div>
       </div>
-        <button onClick$={() => { location.href = '/payment' }}>Pay</button>
+
     </div>
   );
 });

@@ -16,7 +16,9 @@ export default component$(() => {
               <label htmlFor="password"><b>Password</b></label>
               <input type="password" placeholder="Enter Password" name="password" required />
 
-              <button type="submit">Login</button>
+              <div class="login">
+                <button type="submit">Login</button>
+              </div>
           </div>
       </Form>
     );

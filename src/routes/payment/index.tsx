@@ -47,7 +47,6 @@ export default component$(() => {
         <input type="text" name="cvc" placeholder="CVC" pattern="" />
       </div>
       <div class="purchase">
-        <label>Purchase</label>
         <button type="submit">Purchase</button>
       </div>
     </Form>

@@ -7,3 +7,15 @@ ul {
 ul li {
     margin: 20px;
 }
+
+.total {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+button {
+    margin-left: 20px;
+}

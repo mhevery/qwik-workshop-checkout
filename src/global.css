@@ -137,3 +137,25 @@ button.link {
 button.link:hover {
   text-decoration: underline;
 }
+
+button {
+  background-color: var(--qwik-light-blue);
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+}
+
+button:hover {
+  opacity: 0.8;
+}
+
+input {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid var(--qwik-light-purple);
+  box-sizing: border-box;
+}

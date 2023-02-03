@@ -23,3 +23,9 @@ input {
 .expiration input {
   width: 100px;
 }
+
+.purchase {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}

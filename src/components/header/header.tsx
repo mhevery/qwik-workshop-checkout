@@ -2,7 +2,7 @@ import { component$, useStylesScoped$ } from "@builder.io/qwik";
 import { QwikLogo } from "../icons/qwik";
 import styles from "./header.css?inline";
 import { logout } from "~/services/authenticationService";
-import { ActionLink } from "../action-link";
+import { ActionLink } from "../actionLink/action-link";
 
 export default component$(() => {
   useStylesScoped$(styles);
