@@ -3,6 +3,7 @@ import {type DocumentHead, loader$} from "@builder.io/qwik-city";
 import { type Product, products } from "~/data/productsDB";
 import { ProductCmp } from "~/components/product/product";
 import indexCSS from "./index.css?inline";
+import CartSvg from '../assets/cart';
 
 export const productsLoader = loader$(() => {
   return products;
@@ -23,7 +24,7 @@ export default component$(() => {
                 }
             />
             <div class="cart">
-                [ <a href="/cart/">cart</a> ]
+                <a href="/cart/"><CartSvg /></a>
             </div>
         </section>
       <ul>
