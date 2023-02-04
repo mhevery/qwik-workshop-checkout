@@ -13,16 +13,18 @@ export const ProductCmp = component$(({ product }: ProductCmpProps) => {
     useStylesScoped$(productCSS);
     const addToCart = addToCartAction.use();
     return (
-        <div>
-            <h2>
+        <div class="card">
+            <div class="container">
                 <img alt={`${product.name} image`} src={product.image} />
-                {product.name} ({currencyFormat(product.price)})
-            </h2>
-            <h3>{product.description}</h3>
-            <Form action={addToCart}>
-                <input type="hidden" name="id" value={product.id} />
-                <button type="submit">Buy</button>
-            </Form>
+                <h2>
+                    {product.name} ({currencyFormat(product.price)})
+                </h2>
+                <p>{product.description}</p>
+                <Form action={addToCart}>
+                    <input type="hidden" name="id" value={product.id} />
+                    <button type="submit">Add to cart</button>
+                </Form>
+            </div>
         </div>
     );
 });

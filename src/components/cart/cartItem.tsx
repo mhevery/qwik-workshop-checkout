@@ -14,19 +14,21 @@ export const CartItemCmp = component$(
     const updateAction = updateCountAction.use();
     return (
       <div class="cartItem">
-        <h2>
-          <img src={item.product.image} alt={`${item.product.name} image`} />
-          {item.product.name}
-        </h2>
-        <h3>{item.product.description}</h3>
-        <div class="qty">
-          <PlusMinus qty={item.qty} id={item.productId} updateAction={updateAction} />
-        </div>
-        <div class="">
-          {item.product.name}
-          <div class="description">{item.product.description} </div>
-        </div>
-        <div class="price">{currencyFormat(item.product.price)}</div>
+          <div className="container">
+              <img src={item.product.image} alt={`${item.product.name} image`} />
+                <h2>
+                  {item.product.name}
+                </h2>
+                <h3>{item.product.description}</h3>
+                <div class="qty">
+                  <PlusMinus qty={item.qty} id={item.productId} updateAction={updateAction} />
+                </div>
+                <div class="">
+                  {item.product.name}
+                  <div class="description">{item.product.description} </div>
+                </div>
+                <div class="price">{currencyFormat(item.product.price)}</div>
+          </div>
       </div>
     );
   }
