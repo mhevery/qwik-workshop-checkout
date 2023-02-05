@@ -3,7 +3,7 @@ import {type DocumentHead, loader$} from "@builder.io/qwik-city";
 import { type Product, products } from "~/data/productsDB";
 import { ProductCmp } from "~/components/product/product";
 import indexCSS from "./index.css?inline";
-import CartSvg from '../assets/cart';
+import CartSvg from '../components/icons/cart';
 import {CartItem, getCartItemsFromCookie} from "~/routes/cart";
 
 export const productsLoader = loader$(() => {

@@ -4,7 +4,7 @@ import productCSS from "./product.css?inline";
 import { addToCartAction } from "~/routes/cart";
 import { currencyFormat } from "~/routes/utils";
 import { Form } from "@builder.io/qwik-city";
-import CartSvg from "~/assets/cart";
+import CartSvg from "~/components/icons/cart";
 
 interface ProductCmpProps {
     product?: Product;

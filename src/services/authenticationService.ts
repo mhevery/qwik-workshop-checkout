@@ -1,5 +1,6 @@
 import { users, User } from "~/data/usersDB";
 import { action$, Cookie } from "@builder.io/qwik-city";
+import { updateCartItemsCookie } from "~/routes/cart";
 
 export function getAuthenticationFromCookie(cookie: Cookie): User | undefined {
   const authCookie = cookie.get("authUser");
@@ -20,6 +21,7 @@ export const login = action$(({ username, password }, { redirect, cookie }) => {
 export const logout = action$(({}, { redirect, cookie }) => {
   console.log("Logout");
   updateAuthCookie(cookie, "");
+  updateCartItemsCookie(cookie, []);
   throw redirect(308, "/login");
 });
 

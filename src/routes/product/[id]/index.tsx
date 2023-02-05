@@ -3,7 +3,7 @@ import { loader$ } from "@builder.io/qwik-city";
 import { products } from "~/data/productsDB";
 import {ProductCmp} from "~/components/product/product";
 import indexCSS from "./index.css?inline";
-import CartSvg from "~/assets/cart";
+import CartSvg from "~/components/icons/cart";
 
 export const productLoader = loader$(({ params }) => {
     return products.find((product) => product.id === params.id);
