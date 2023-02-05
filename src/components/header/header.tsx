@@ -3,7 +3,11 @@ import styles from "./header.css?inline";
 import { logout } from "~/services/authenticationService";
 import { ActionLink } from "../actionLink/action-link";
 
-export default component$(() => {
+interface HeaderProps {
+  loggedIn: boolean;
+}
+
+export default component$(({ loggedIn } : HeaderProps) => {
   useStylesScoped$(styles);
   const logoutAction = logout.use();
 
@@ -39,9 +43,9 @@ export default component$(() => {
             Tutorials
           </a>
         </li>
-        <li>
+        {loggedIn && <li>
           <ActionLink action={logoutAction}>Logout</ActionLink>
-        </li>
+        </li>}
       </ul>
     </header>
   );
