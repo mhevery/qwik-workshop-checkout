@@ -38,7 +38,6 @@ export default component$(() => {
   useStylesScoped$(CSS);
   const cartPriceSignal = cartPriceLoader.use();
   const purchase = purchaseAction.use();
-  purchase.run(null as any);
   return (
       <>
         <div>Payment total: {cartPriceSignal.value}</div>

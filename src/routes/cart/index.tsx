@@ -103,6 +103,7 @@ export default component$(() => {
       </ul>
       <div>
         <div class="total">
+            Total: &nbsp;
           {currencyFormat(
             cartSignal.value.reduce(
               (sum, item) => sum + item.qty * item.product.price,
