@@ -11,7 +11,7 @@ export default component$(() => {
   return (
     <header>
       <div class="logo">
-        <a href="/" target="_blank" title="Lightsabers Inc.">
+        <a href="/" title="Lightsabers Inc.">
           Lightsabers Inc.
         </a>
       </div>
