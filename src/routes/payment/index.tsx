@@ -40,7 +40,7 @@ export default component$(() => {
   const purchase = purchaseAction.use();
   return (
       <>
-        <div>Payment total: {cartPriceSignal.value}</div>
+        <div class="total">Payment total: {cartPriceSignal.value}</div>
         <Form action={purchase}>
           <div class="cardHolderName">
             <label>Card Holder Name</label>

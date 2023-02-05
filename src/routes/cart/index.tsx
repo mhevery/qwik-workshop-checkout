@@ -115,7 +115,7 @@ export default component$(() => {
               location.href = "/payment";
             }}
           >
-            Checkout & Pay
+            Checkout
           </button>
         </div>
       </div>
