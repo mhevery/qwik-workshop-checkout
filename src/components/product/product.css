@@ -3,7 +3,7 @@
   transition: 0.3s;
   border-radius: 5px;
   width: 250px;
-  height: 300px;
+  height: 330px;
 }
 
 .card:hover {
@@ -20,5 +20,22 @@
 .card img {
   width: 100px;
   height: 100px;
+}
+
+.card button {
+  width: 150px;
+  display: flex;
+  place-items: center;
+}
+
+.card button div {
+  width: 100%;
+}
+
+.card .learnMore {
+  font-size: 12px;
+  color: var(--qwik-light-blue);
+  line-height: 15px;
+  margin-top: 5px;
 }
 

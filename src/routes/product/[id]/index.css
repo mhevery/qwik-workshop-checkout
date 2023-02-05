@@ -1,0 +1,29 @@
+.container {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+section {
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
+    padding: 0;
+}
+
+.cart .goToCart {
+    width: 150px;
+    height: 40px;
+    display: flex;
+    place-items: center;
+}
+
+.cart .goToCart div {
+    width: 100%;
+}
+
+.productContainer {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}

@@ -4,15 +4,25 @@ import { type Product, products } from "~/data/productsDB";
 import { ProductCmp } from "~/components/product/product";
 import indexCSS from "./index.css?inline";
 import CartSvg from '../assets/cart';
+import {CartItem, getCartItemsFromCookie} from "~/routes/cart";
 
 export const productsLoader = loader$(() => {
   return products;
 });
 
+export const cartQuantityLoader = loader$(({ cookie }) => {
+    const cartItems: CartItem[] = getCartItemsFromCookie(cookie);
+    return cartItems.reduce(
+        (sum, item) => sum + item.qty,
+        0
+    );
+});
+
 export default component$(() => {
+    useStylesScoped$(indexCSS);
   const filterSignal = useSignal("");
-  useStylesScoped$(indexCSS);
   const productsSignal = productsLoader.use();
+  const cartQuantitySiganl = cartQuantityLoader.use();
   return (
     <div>
         <section>
@@ -24,13 +34,14 @@ export default component$(() => {
                 }
             />
             <div class="cart">
-                <a href="/cart/"><CartSvg /></a>
+                {`Your cart has ${cartQuantitySiganl.value} items`}
+                <button class="goToCart" onClick$={() => { location.href = "/cart"; }}><CartSvg /><div>Go to cart</div></button>
             </div>
         </section>
       <ul>
         {productsSignal.value.filter(predicate).map((product) => (
           <li>
-            <ProductCmp product={product} />
+            <ProductCmp product={product} displayLink={true} />
           </li>
         ))}
       </ul>
