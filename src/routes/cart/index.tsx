@@ -93,31 +93,39 @@ export default component$(() => {
   return (
     <div>
       <h1>Cart</h1>
-      <ul>
-        {cartSignal.value.map((item) => (
-          <li>
-            <CartItemCmp item={item} />
-          </li>
-        ))}
-      </ul>
-      <div>
-        <div class="total">
-          Total: &nbsp;
-          {currencyFormat(
-            cartSignal.value.reduce(
-              (sum, item) => sum + item.qty * item.product.price,
-              0
-            )
-          )}
-          <button
-            onClick$={() => {
-              location.href = "/payment";
-            }}
-          >
-            Checkout
-          </button>
-        </div>
-      </div>
+        {cartSignal.value.length > 0 ? <div>
+            <div class="boxHeader">
+                <h2 class="header">Lightsabers in Cart</h2>
+            </div>
+            <div class="middleCart">
+                <table class="cartTable">
+                    {cartSignal.value.map((item) => (
+                        <CartItemCmp item={item} />
+                    ))}
+                </table>
+            </div>
+            <div class="cartBottom">
+                <div>
+                    Total: <label>{currencyFormat(
+                    cartSignal.value.reduce(
+                        (sum, item) => sum + item.qty * item.product.price,
+                        0
+                    )
+                )}</label>
+                </div>
+            </div>
+          <div>
+            <div class="total">
+              <button
+                onClick$={() => {
+                  location.href = "/payment";
+                }}
+              >
+                Checkout
+              </button>
+            </div>
+          </div>
+        </div> : <h3>No selected Items</h3>}
     </div>
   );
 });
