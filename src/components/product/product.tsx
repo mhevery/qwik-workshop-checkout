@@ -9,9 +9,10 @@ import CartSvg from "~/components/icons/cart";
 interface ProductCmpProps {
     product?: Product;
     displayLink?: boolean;
+    displayDescription?: boolean;
 }
 
-export const ProductCmp = component$(({ product, displayLink = false }: ProductCmpProps) => {
+export const ProductCmp = component$(({ product, displayLink = false, displayDescription = true }: ProductCmpProps) => {
     useStylesScoped$(productCSS);
     const addToCart = addToCartAction.use();
     return (
@@ -22,7 +23,7 @@ export const ProductCmp = component$(({ product, displayLink = false }: ProductC
                 <h2>
                     {product.name} ({currencyFormat(product.price)})
                 </h2>
-                <p>{product.description}</p>
+                {displayDescription && <p>{product.description}</p>}
                 <Form action={addToCart}>
                     <input type="hidden" name="id" value={product.id} />
                     <button type="submit"><CartSvg /><div>Add to cart</div></button>

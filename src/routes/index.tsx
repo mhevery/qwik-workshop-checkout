@@ -41,7 +41,7 @@ export default component$(() => {
       <ul>
         {productsSignal.value.filter(predicate).map((product) => (
           <li>
-            <ProductCmp product={product} displayLink={true} />
+            <ProductCmp product={product} displayLink={true} displayDescription={false} />
           </li>
         ))}
       </ul>
