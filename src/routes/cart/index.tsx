@@ -11,7 +11,7 @@ import { CartItemCmp } from "~/components/cart/cartItem";
 import { products, type Product } from "~/data/productsDB";
 import { currencyFormat } from "../utils";
 import indexCSS from "./index.css?inline";
-export { paymentLoader } from "../payment";
+export { paymentLoader } from "../(auth)/payment";
 
 export interface CartItem {
   productId: string;
@@ -102,7 +102,7 @@ export default component$(() => {
       </ul>
       <div>
         <div class="total">
-            Total: &nbsp;
+          Total: &nbsp;
           {currencyFormat(
             cartSignal.value.reduce(
               (sum, item) => sum + item.qty * item.product.price,

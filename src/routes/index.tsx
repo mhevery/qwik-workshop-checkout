@@ -1,47 +1,56 @@
-import {component$, useSignal, useStylesScoped$} from "@builder.io/qwik";
-import {type DocumentHead, loader$} from "@builder.io/qwik-city";
+import { component$, useSignal, useStylesScoped$ } from "@builder.io/qwik";
+import { type DocumentHead, loader$ } from "@builder.io/qwik-city";
 import { type Product, products } from "~/data/productsDB";
 import { ProductCmp } from "~/components/product/product";
 import indexCSS from "./index.css?inline";
-import CartSvg from '../components/icons/cart';
-import {CartItem, getCartItemsFromCookie} from "~/routes/cart";
+import CartSvg from "../components/icons/cart";
+import { CartItem, getCartItemsFromCookie } from "~/routes/cart";
 
 export const productsLoader = loader$(() => {
   return products;
 });
 
 export const cartQuantityLoader = loader$(({ cookie }) => {
-    const cartItems: CartItem[] = getCartItemsFromCookie(cookie);
-    return cartItems.reduce(
-        (sum, item) => sum + item.qty,
-        0
-    );
+  const cartItems: CartItem[] = getCartItemsFromCookie(cookie);
+  return cartItems.reduce((sum, item) => sum + item.qty, 0);
 });
 
 export default component$(() => {
-    useStylesScoped$(indexCSS);
+  useStylesScoped$(indexCSS);
   const filterSignal = useSignal("");
   const productsSignal = productsLoader.use();
   const cartQuantitySiganl = cartQuantityLoader.use();
   return (
     <div>
-        <section>
-            <input
-                placeholder="Search"
-                value={filterSignal.value}
-                onInput$={(e) =>
-                    (filterSignal.value = (e.target as HTMLInputElement).value)
-                }
-            />
-            <div class="cart">
-                {`Your cart has ${cartQuantitySiganl.value} items`}
-                <button class="goToCart" onClick$={() => { location.href = "/cart"; }}><CartSvg /><div>Go to cart</div></button>
-            </div>
-        </section>
+      <section>
+        <input
+          placeholder="Search"
+          value={filterSignal.value}
+          onInput$={(e) =>
+            (filterSignal.value = (e.target as HTMLInputElement).value)
+          }
+        />
+        <div class="cart">
+          {`Your cart has ${cartQuantitySiganl.value} items`}
+          <button
+            class="goToCart"
+            onClick$={() => {
+              location.href = "/cart";
+            }}
+          >
+            <CartSvg />
+            <div>Go to cart</div>
+          </button>
+        </div>
+      </section>
       <ul>
         {productsSignal.value.filter(predicate).map((product) => (
           <li>
-            <ProductCmp product={product} displayLink={true} displayDescription={false} />
+            <ProductCmp
+              product={product}
+              displayLink={true}
+              displayDescription={false}
+            />
           </li>
         ))}
       </ul>
@@ -65,4 +74,3 @@ export const head: DocumentHead = {
     },
   ],
 };
-
