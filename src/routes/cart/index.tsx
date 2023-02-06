@@ -93,27 +93,33 @@ export default component$(() => {
   return (
     <div>
       <h1>Cart</h1>
-        {cartSignal.value.length > 0 ? <div>
-            <div class="boxHeader">
-                <h2 class="header">Lightsabers in Cart</h2>
+      {cartSignal.value.length > 0 ? (
+        <div>
+          <div class="boxHeader">
+            <h2 class="header">Lightsabers in Cart</h2>
+          </div>
+          <div class="middleCart">
+            <table class="cartTable">
+              <tbody>
+                {cartSignal.value.map((item) => (
+                  <CartItemCmp item={item} />
+                ))}
+              </tbody>
+            </table>
+          </div>
+          <div class="cartBottom">
+            <div>
+              Total:{" "}
+              <label>
+                {currencyFormat(
+                  cartSignal.value.reduce(
+                    (sum, item) => sum + item.qty * item.product.price,
+                    0
+                  )
+                )}
+              </label>
             </div>
-            <div class="middleCart">
-                <table class="cartTable">
-                    {cartSignal.value.map((item) => (
-                        <CartItemCmp item={item} />
-                    ))}
-                </table>
-            </div>
-            <div class="cartBottom">
-                <div>
-                    Total: <label>{currencyFormat(
-                    cartSignal.value.reduce(
-                        (sum, item) => sum + item.qty * item.product.price,
-                        0
-                    )
-                )}</label>
-                </div>
-            </div>
+          </div>
           <div>
             <div class="total">
               <button
@@ -125,7 +131,10 @@ export default component$(() => {
               </button>
             </div>
           </div>
-        </div> : <h3>No selected Items</h3>}
+        </div>
+      ) : (
+        <h3>No selected Items</h3>
+      )}
     </div>
   );
 });

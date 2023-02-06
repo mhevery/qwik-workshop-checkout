@@ -1,10 +1,23 @@
-import { component$, useSignal, useStylesScoped$ } from "@builder.io/qwik";
-import { type DocumentHead, loader$ } from "@builder.io/qwik-city";
-import { type Product, products } from "~/data/productsDB";
+import {
+  component$,
+  Resource,
+  useResource$,
+  useSignal,
+  useStylesScoped$,
+} from "@builder.io/qwik";
+import { loader$, useLocation, type DocumentHead } from "@builder.io/qwik-city";
+import {
+  getBuilderSearchParams,
+  getContent,
+  RenderContent,
+} from "@builder.io/sdk-qwik";
 import { ProductCmp } from "~/components/product/product";
-import indexCSS from "./index.css?inline";
+import { products, type Product } from "~/data/productsDB";
+import { type CartItem, getCartItemsFromCookie } from "~/routes/cart";
 import CartSvg from "../components/icons/cart";
-import { CartItem, getCartItemsFromCookie } from "~/routes/cart";
+import indexCSS from "./index.css?inline";
+
+export const BUILDER_PUBLIC_API_KEY = "26950364a825464593a7fc11c6bbda89"; // ggignore
 
 export const productsLoader = loader$(() => {
   return products;
@@ -16,12 +29,37 @@ export const cartQuantityLoader = loader$(({ cookie }) => {
 });
 
 export default component$(() => {
+  const location = useLocation();
+  const builderContentRsrc = useResource$<any>(() => {
+    return getContent({
+      model: "hero",
+      apiKey: BUILDER_PUBLIC_API_KEY,
+      options: getBuilderSearchParams(location.query),
+      userAttributes: {
+        urlPath: location.pathname || "/",
+      },
+    });
+  });
+
   useStylesScoped$(indexCSS);
   const filterSignal = useSignal("");
   const productsSignal = productsLoader.use();
   const cartQuantitySiganl = cartQuantityLoader.use();
   return (
     <div>
+      <Resource
+        value={builderContentRsrc}
+        onPending={() => <div>Loading...</div>}
+        onResolved={(content) => (
+          <RenderContent
+            model="page"
+            content={content}
+            apiKey={BUILDER_PUBLIC_API_KEY}
+            // Optional: pass in a custom component registry
+            // customComponents={CUSTOM_COMPONENTS}
+          />
+        )}
+      />
       <section>
         <input
           placeholder="Search"
@@ -35,7 +73,7 @@ export default component$(() => {
           <button
             class="goToCart"
             onClick$={() => {
-              location.href = "/cart";
+              window.location.replace("/cart");
             }}
           >
             <CartSvg />
