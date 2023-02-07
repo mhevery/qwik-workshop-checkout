@@ -124,7 +124,7 @@ export default component$(() => {
             <div class="total">
               <button
                 onClick$={() => {
-                  location.href = "/payment";
+                    window.location.replace("/payment");
                 }}
               >
                 Checkout
