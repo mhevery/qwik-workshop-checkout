@@ -1,17 +1,15 @@
 import {
   component$,
-  Resource,
-  useResource$,
   useSignal,
   useStore,
   useStylesScoped$,
 } from "@builder.io/qwik";
-import { loader$, useLocation, type DocumentHead } from "@builder.io/qwik-city";
+import { loader$, type DocumentHead } from "@builder.io/qwik-city";
 import {
   getBuilderSearchParams,
   getContent,
-  type RegisteredComponent,
   RenderContent,
+  type RegisteredComponent,
 } from "@builder.io/sdk-qwik";
 import { ProductCmp } from "~/components/product/product";
 import { products, type Product } from "~/data/productsDB";
@@ -30,40 +28,36 @@ export const cartQuantityLoader = loader$(({ cookie }) => {
   return cartItems.reduce((sum, item) => sum + item.qty, 0);
 });
 
-export default component$(() => {
-  const location = useLocation();
-  const builderContentRsrc = useResource$<any>(() => {
-    return getContent({
-      model: "hero",
-      apiKey: BUILDER_PUBLIC_API_KEY,
-      options: {
-        ...getBuilderSearchParams(location.query),
-        cachebust: true,
-      },
-      userAttributes: {
-        urlPath: location.pathname || "/",
-      },
-    });
+export const builderContentLoader = loader$(({ url }) => {
+  const query: Record<string, any> = {};
+  url.searchParams.forEach((value, key) => (query[key] = value));
+  return getContent({
+    model: "hero",
+    apiKey: BUILDER_PUBLIC_API_KEY,
+    options: {
+      ...getBuilderSearchParams(query),
+      cachebust: true,
+    },
+    userAttributes: {
+      urlPath: url.pathname || "/",
+    },
   });
+});
 
+export default component$(() => {
   useStylesScoped$(indexCSS);
   const filterSignal = useSignal("");
   const productsSignal = productsLoader.use();
-  const cartQuantitySiganl = cartQuantityLoader.use();
+  const cartQuantitySignal = cartQuantityLoader.use();
+  const builderContent = builderContentLoader.use();
   return (
     <div>
-      <Resource
-        value={builderContentRsrc}
-        onPending={() => <div>Loading...</div>}
-        onResolved={(content) => (
-          <RenderContent
-            model="page"
-            content={content}
-            apiKey={BUILDER_PUBLIC_API_KEY}
-            // Optional: pass in a custom component registry
-            customComponents={CUSTOM_COMPONENTS}
-          />
-        )}
+      <RenderContent
+        model="page"
+        content={builderContent.value}
+        apiKey={BUILDER_PUBLIC_API_KEY}
+        // Optional: pass in a custom component registry
+        customComponents={CUSTOM_COMPONENTS}
       />
       <section>
         <input
@@ -74,7 +68,7 @@ export default component$(() => {
           }
         />
         <div class="cart">
-          {`Your cart has ${cartQuantitySiganl.value} items`}
+          {`Your cart has ${cartQuantitySignal.value} items`}
           <button
             class="goToCart"
             onClick$={() => {
