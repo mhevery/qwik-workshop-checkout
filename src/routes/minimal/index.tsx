@@ -9,13 +9,11 @@ import {
 export const BUILDER_PUBLIC_API_KEY = "26950364a825464593a7fc11c6bbda89"; // ggignore
 
 export const builderContentLoader = loader$(({ url }) => {
-  const query: Record<string, any> = {};
-  url.searchParams.forEach((value, key) => (query[key] = value));
   return getContent({
     model: "hero",
     apiKey: BUILDER_PUBLIC_API_KEY,
     options: {
-      ...getBuilderSearchParams(query),
+      ...getBuilderSearchParams(url.searchParams),
       cachebust: true,
     },
     userAttributes: {
