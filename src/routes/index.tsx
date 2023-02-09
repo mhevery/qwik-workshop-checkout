@@ -3,17 +3,19 @@ import {
   Resource,
   useResource$,
   useSignal,
+  useStore,
   useStylesScoped$,
 } from "@builder.io/qwik";
 import { loader$, useLocation, type DocumentHead } from "@builder.io/qwik-city";
 import {
   getBuilderSearchParams,
   getContent,
+  type RegisteredComponent,
   RenderContent,
 } from "@builder.io/sdk-qwik";
 import { ProductCmp } from "~/components/product/product";
 import { products, type Product } from "~/data/productsDB";
-import { type CartItem, getCartItemsFromCookie } from "~/routes/cart";
+import { getCartItemsFromCookie, type CartItem } from "~/routes/cart";
 import CartSvg from "../components/icons/cart";
 import indexCSS from "./index.css?inline";
 
@@ -34,7 +36,10 @@ export default component$(() => {
     return getContent({
       model: "hero",
       apiKey: BUILDER_PUBLIC_API_KEY,
-      options: getBuilderSearchParams(location.query),
+      options: {
+        ...getBuilderSearchParams(location.query),
+        cachebust: true,
+      },
       userAttributes: {
         urlPath: location.pathname || "/",
       },
@@ -56,7 +61,7 @@ export default component$(() => {
             content={content}
             apiKey={BUILDER_PUBLIC_API_KEY}
             // Optional: pass in a custom component registry
-            // customComponents={CUSTOM_COMPONENTS}
+            customComponents={CUSTOM_COMPONENTS}
           />
         )}
       />
@@ -112,3 +117,32 @@ export const head: DocumentHead = {
     },
   ],
 };
+
+export const MyFunComponent = component$((props: { text: string }) => {
+  const state = useStore({
+    count: 0,
+  });
+
+  return (
+    <div style="color: white;">
+      <h3>{props.text.toUpperCase()}</h3>
+      <p>{state.count}</p>
+      <button onClick$={() => state.count++}>Click me</button>
+    </div>
+  );
+});
+
+export const CUSTOM_COMPONENTS: RegisteredComponent[] = [
+  {
+    component: MyFunComponent,
+    name: "MyFunComponent",
+
+    inputs: [
+      {
+        name: "text",
+        type: "string",
+        defaultValue: "Hello world",
+      },
+    ],
+  },
+];

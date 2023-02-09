@@ -37,3 +37,6 @@ lerna-debug.log*
 .yarn/*
 !.yarn/releases
 .history
+
+# Cloudflare
+functions/**/*.js
