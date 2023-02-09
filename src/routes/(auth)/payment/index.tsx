@@ -2,15 +2,8 @@ import { component$, useStylesScoped$ } from "@builder.io/qwik";
 import { action$, Form, loader$ } from "@builder.io/qwik-city";
 import CSS from "./index.css?inline";
 import { currencyFormat } from "~/routes/utils";
-import { CartItem, getCartItemsFromCookie } from "~/routes/cart";
+import { type CartItem, getCartItemsFromCookie } from "~/routes/cart";
 import { products } from "~/data/productsDB";
-
-interface PaymentForm {
-  cardHolderName: string;
-  cardNumber: string;
-  expiration: string;
-  cvc: string;
-}
 
 export const cartPriceLoader = loader$(({ cookie }) => {
   const cartItems: CartItem[] = getCartItemsFromCookie(cookie);

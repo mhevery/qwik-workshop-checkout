@@ -1,5 +1,5 @@
 import { component$, useStylesScoped$ } from "@builder.io/qwik";
-import { Product } from "~/data/productsDB";
+import { type Product } from "~/data/productsDB";
 import productCSS from "./product.css?inline";
 import { addToCartAction } from "~/routes/cart";
 import { currencyFormat } from "~/routes/utils";

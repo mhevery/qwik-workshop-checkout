@@ -1,5 +1,5 @@
 import { component$, Slot } from "@builder.io/qwik";
-import { RequestHandler } from "@builder.io/qwik-city";
+import { type RequestHandler } from "@builder.io/qwik-city";
 import { getAuthenticationFromCookie } from "~/services/authenticationService";
 
 export const onGet: RequestHandler = async ({ redirect, request, cookie }) => {
