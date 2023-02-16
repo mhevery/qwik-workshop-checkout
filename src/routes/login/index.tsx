@@ -14,7 +14,7 @@ export default component$(() => {
         <input
           type="hidden"
           name="redirectUrl"
-          value={new URL(location.href).searchParams.get("redirect")}
+          value={new URL(location.url).searchParams.get("redirect")}
         />
         <label htmlFor="username">
           <b>Username</b>
