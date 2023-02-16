@@ -5,7 +5,7 @@ import { currencyFormat } from "~/routes/utils";
 import { type CartItem, getCartItemsFromCookie } from "~/routes/cart";
 import { products } from "~/data/productsDB";
 
-export const cartPriceLoader = loader$(({ cookie }) => {
+export const useCartPriceLoader = loader$(({ cookie }) => {
   const cartItems: CartItem[] = getCartItemsFromCookie(cookie);
   return currencyFormat(
     cartItems.reduce((sum, item) => {
@@ -20,16 +20,12 @@ export const cartPriceLoader = loader$(({ cookie }) => {
   );
 });
 
-export const paymentLoader = loader$(() => {
-  return {};
-});
-
-export const purchaseAction = action$(() => {});
+export const usePurchaseAction = action$(() => {});
 
 export default component$(() => {
   useStylesScoped$(CSS);
-  const cartPriceSignal = cartPriceLoader.use();
-  const purchase = purchaseAction.use();
+  const cartPriceSignal = useCartPriceLoader();
+  const purchase = usePurchaseAction();
   return (
     <>
       <div class="total">Payment total: {cartPriceSignal.value}</div>

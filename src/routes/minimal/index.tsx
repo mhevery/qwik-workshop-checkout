@@ -8,7 +8,7 @@ import {
 
 export const BUILDER_PUBLIC_API_KEY = "26950364a825464593a7fc11c6bbda89"; // ggignore
 
-export const builderContentLoader = loader$(({ url }) => {
+export const useBuilderContentLoader = loader$(({ url }) => {
   return getContent({
     model: "hero",
     apiKey: BUILDER_PUBLIC_API_KEY,
@@ -23,7 +23,7 @@ export const builderContentLoader = loader$(({ url }) => {
 });
 
 export default component$(() => {
-  const builderContent = builderContentLoader.use();
+  const builderContent = useBuilderContentLoader();
   return (
     <div>
       <RenderContent

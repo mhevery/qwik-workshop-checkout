@@ -11,7 +11,6 @@ import { CartItemCmp } from "~/components/cart/cartItem";
 import { products, type Product } from "~/data/productsDB";
 import { currencyFormat } from "../utils";
 import indexCSS from "./index.css?inline";
-export { paymentLoader } from "../(auth)/payment";
 
 export interface CartItem {
   productId: string;
@@ -22,7 +21,7 @@ export interface ResolvedCartItem extends CartItem {
   product: Product;
 }
 
-export const addToCartAction = action$(
+export const useAddToCartAction = action$(
   ({ id }, { redirect, cookie }) => {
     console.log("Add to cart", id);
     const cartItems: CartItem[] = getCartItemsFromCookie(cookie);
@@ -40,7 +39,7 @@ export const addToCartAction = action$(
   })
 );
 
-export const updateCountAction = action$(
+export const useUpdateCountAction = action$(
   ({ id, qtyChange }, { cookie }) => {
     console.log("updateCountAction", id, qtyChange);
     let cartItems: CartItem[] = getCartItemsFromCookie(cookie);
@@ -59,7 +58,7 @@ export const updateCountAction = action$(
   })
 );
 
-export const cartLoader = loader$(({ cookie }) => {
+export const useCartLoader = loader$(({ cookie }) => {
   const cartItems: CartItem[] = getCartItemsFromCookie(cookie);
   return cartItems.map((item) => ({
     ...item,
@@ -89,7 +88,7 @@ export function updateCartItemsCookie(cookie: Cookie, cartItems: CartItem[]) {
 
 export default component$(() => {
   useStylesScoped$(indexCSS);
-  const cartSignal = cartLoader.use();
+  const cartSignal = useCartLoader();
   return (
     <div>
       <h1>Cart</h1>
@@ -139,16 +138,16 @@ export default component$(() => {
   );
 });
 
-export const head: DocumentHead = ({ getData }) => {
+export const head: DocumentHead = ({ resolveValue }) => {
   return {
     title:
       "Your cart has " +
-      getData(cartLoader).reduce((sum, item) => sum + item.qty, 0) +
+      resolveValue(useCartLoader).reduce((sum, item) => sum + item.qty, 0) +
       " items",
     meta: [
       {
         name: "description",
-        content: "Qwik site description",
+        content: "Qwik checkout cart page",
       },
     ],
   };

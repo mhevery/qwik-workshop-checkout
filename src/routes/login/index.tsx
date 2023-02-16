@@ -1,10 +1,10 @@
 import { component$, useStylesScoped$ } from "@builder.io/qwik";
 import { Form, useLocation } from "@builder.io/qwik-city";
 import indexCSS from "./index.css?inline";
-import { login } from "~/services/authenticationService";
+import { useLogin } from "~/services/authenticationService";
 
 export default component$(() => {
-  const loginAction = login.use();
+  const loginAction = useLogin();
   const location = useLocation();
   useStylesScoped$(indexCSS);
 

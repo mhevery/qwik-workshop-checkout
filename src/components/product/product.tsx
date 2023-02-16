@@ -1,7 +1,7 @@
 import { component$, useStylesScoped$ } from "@builder.io/qwik";
 import { type Product } from "~/data/productsDB";
 import productCSS from "./product.css?inline";
-import { addToCartAction } from "~/routes/cart";
+import { useAddToCartAction } from "~/routes/cart";
 import { currencyFormat } from "~/routes/utils";
 import { Form } from "@builder.io/qwik-city";
 import CartSvg from "~/components/icons/cart";
@@ -19,7 +19,7 @@ export const ProductCmp = component$(
     displayDescription = true,
   }: ProductCmpProps) => {
     useStylesScoped$(productCSS);
-    const addToCart = addToCartAction.use();
+    const addToCart = useAddToCartAction();
     return product ? (
       <div class="card">
         <div class="container">

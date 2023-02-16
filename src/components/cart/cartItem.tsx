@@ -1,6 +1,6 @@
 import { component$, useStylesScoped$ } from "@builder.io/qwik";
 import { PlusMinus } from "~/components/plusMinus/plus-minus";
-import { type ResolvedCartItem, updateCountAction } from "~/routes/cart";
+import { type ResolvedCartItem, useUpdateCountAction } from "~/routes/cart";
 import { currencyFormat } from "~/routes/utils";
 import indexCSS from "./cartItem.css?inline";
 
@@ -10,7 +10,7 @@ interface CartItemCmpProps {
 
 export const CartItemCmp = component$(({ item }: CartItemCmpProps) => {
   useStylesScoped$(indexCSS);
-  const updateAction = updateCountAction.use();
+  const updateAction = useUpdateCountAction();
   return (
       <tr class="cartItem">
         <td width="65">

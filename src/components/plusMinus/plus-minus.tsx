@@ -6,7 +6,7 @@ import { type ActionStore } from "@builder.io/qwik-city";
 interface PlusMinusProps {
   qty: number;
   id: string;
-  updateAction: ActionStore<any, any>;
+  updateAction: ActionStore<any, any, boolean>;
 }
 
 export const PlusMinus = component$<PlusMinusProps>(

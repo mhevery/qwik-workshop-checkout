@@ -5,13 +5,13 @@ import {ProductCmp} from "~/components/product/product";
 import indexCSS from "./index.css?inline";
 import CartSvg from "~/components/icons/cart";
 
-export const productLoader = loader$(({ params }) => {
+export const useProductLoader = loader$(({ params }) => {
     return products.find((product) => product.id === params.id);
 });
 
 export default component$(() => {
     useStylesScoped$(indexCSS);
-    const productSignal = productLoader.use();
+    const productSignal = useProductLoader();
     return (
         <div class="container">
             <section>

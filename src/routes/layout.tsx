@@ -4,12 +4,12 @@ import Header from "~/components/header/header";
 import {loader$} from "@builder.io/qwik-city";
 import {getAuthenticationFromCookie} from "~/services/authenticationService";
 
-export const userLoader = loader$(({ cookie }) => {
+export const useUserLoader = loader$(({ cookie }) => {
     return getAuthenticationFromCookie(cookie);
 });
 
 export default component$(() => {
-    const userSignal = userLoader.use();
+    const userSignal = useUserLoader();
   return (
     <>
       <main>

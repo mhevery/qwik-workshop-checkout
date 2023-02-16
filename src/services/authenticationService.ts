@@ -8,7 +8,7 @@ export function getAuthenticationFromCookie(cookie: Cookie): User | undefined {
   return authCookie?.json() || undefined;
 }
 
-export const login = action$(
+export const useLogin = action$(
   ({ username, password, redirectUrl }, { redirect, cookie }) => {
     const user = users.get(username as string);
     console.log("user", user);
@@ -26,7 +26,7 @@ export const login = action$(
   })
 );
 
-export const logout = action$((_, { redirect, cookie }) => {
+export const useLogout = action$((_, { redirect, cookie }) => {
   console.log("Logout");
   updateAuthCookie(cookie, "");
   updateCartItemsCookie(cookie, []);

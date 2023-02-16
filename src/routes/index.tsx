@@ -19,16 +19,16 @@ import indexCSS from "./index.css?inline";
 
 export const BUILDER_PUBLIC_API_KEY = "26950364a825464593a7fc11c6bbda89"; // ggignore
 
-export const productsLoader = loader$(() => {
+export const useProductsLoader = loader$(() => {
   return products;
 });
 
-export const cartQuantityLoader = loader$(({ cookie }) => {
+export const useCartQuantityLoader = loader$(({ cookie }) => {
   const cartItems: CartItem[] = getCartItemsFromCookie(cookie);
   return cartItems.reduce((sum, item) => sum + item.qty, 0);
 });
 
-export const builderContentLoader = loader$(({ url }) => {
+export const useBuilderContentLoader = loader$(({ url }) => {
   return getContent({
     model: "hero",
     apiKey: BUILDER_PUBLIC_API_KEY,
@@ -45,9 +45,9 @@ export const builderContentLoader = loader$(({ url }) => {
 export default component$(() => {
   useStylesScoped$(indexCSS);
   const filterSignal = useSignal("");
-  const productsSignal = productsLoader.use();
-  const cartQuantitySignal = cartQuantityLoader.use();
-  const builderContent = builderContentLoader.use();
+  const productsSignal = useProductsLoader();
+  const cartQuantitySignal = useCartQuantityLoader();
+  const builderContent = useBuilderContentLoader();
   return (
     <div>
       <RenderContent
@@ -105,7 +105,7 @@ export const head: DocumentHead = {
   meta: [
     {
       name: "description",
-      content: "Qwik site description",
+      content: "Qwik checkout index page",
     },
   ],
 };
