@@ -8,12 +8,6 @@ form {
     padding: 16px;
 }
 
-/* The "Forgot password" text */
-span.psw {
-    float: right;
-    padding-top: 16px;
-}
-
 .login {
     width: 100%;
     display: flex;
