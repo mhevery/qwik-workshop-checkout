@@ -12,14 +12,25 @@ section {
 }
 
 .cart .goToCart {
-    width: 150px;
-    height: 40px;
     display: flex;
-    place-items: center;
+}
+
+.cart a {
+    background-color: var(--qwik-light-blue);
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+}
+
+.cart a:hover {
+    opacity: 0.8;
 }
 
 .cart .goToCart div {
     width: 100%;
+    margin-left: 3px;
 }
 
 .productContainer {

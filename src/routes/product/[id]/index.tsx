@@ -16,10 +16,10 @@ export default component$(() => {
         <div class="container">
             <section>
                 <div class="cart">
-                    <button class="goToCart" onClick$={() => { window.location.replace("/cart") }}>
+                    <a class="goToCart" onClick$={() => { window.location.replace("/cart") }}>
                         <CartSvg/>
                         <div>Go to cart</div>
-                    </button>
+                    </a>
                 </div>
             </section>
             <div class="productContainer">
