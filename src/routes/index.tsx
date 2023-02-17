@@ -14,9 +14,8 @@ import {
 import { ProductCmp } from "~/components/product/product";
 import { products, type Product } from "~/data/productsDB";
 import { getCartItemsFromCookie, type CartItem } from "~/routes/cart";
-import CartSvg from "../components/icons/cart";
+import { CartLink } from "~/components/cartLink/cart-link";
 import indexCSS from "./index.css?inline";
-import {CartLink} from "~/components/cartLink/cart-link";
 
 export const BUILDER_PUBLIC_API_KEY = "26950364a825464593a7fc11c6bbda89"; // ggignore
 
