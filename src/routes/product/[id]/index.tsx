@@ -16,7 +16,7 @@ export default component$(() => {
         <div class="container">
             <section>
                 <div class="cart">
-                    <a class="goToCart" onClick$={() => { window.location.replace("/cart") }}>
+                    <a class="goToCart" href="/cart">
                         <CartSvg/>
                         <div>Go to cart</div>
                     </a>
