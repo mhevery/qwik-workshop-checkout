@@ -1,0 +1,25 @@
+.goToCart {
+    width: 110px;
+    height: 25px;
+    display: flex;
+    place-items: center;
+}
+
+a {
+    background-color: var(--qwik-light-blue);
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+a:hover {
+    opacity: 0.8;
+}
+
+.goToCart div {
+    width: 100%;
+    margin-left: 3px;
+}

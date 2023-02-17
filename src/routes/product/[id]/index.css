@@ -11,29 +11,6 @@ section {
     padding: 0;
 }
 
-.cart .goToCart {
-    display: flex;
-}
-
-.cart a {
-    background-color: var(--qwik-light-blue);
-    color: white;
-    padding: 14px 20px;
-    margin: 8px 0;
-    border: none;
-    cursor: pointer;
-    text-decoration: none;
-}
-
-.cart a:hover {
-    opacity: 0.8;
-}
-
-.cart .goToCart div {
-    width: 100%;
-    margin-left: 3px;
-}
-
 .productContainer {
     display: flex;
     justify-content: center;

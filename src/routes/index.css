@@ -28,14 +28,3 @@ ul li {
   text-align: right;
 }
 
-.cart .goToCart {
-  width: 150px;
-  height: 40px;
-  display: flex;
-  place-items: center;
-}
-
-.cart .goToCart div {
-  width: 100%;
-}
-

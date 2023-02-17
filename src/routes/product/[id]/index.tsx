@@ -4,6 +4,7 @@ import { products } from "~/data/productsDB";
 import {ProductCmp} from "~/components/product/product";
 import indexCSS from "./index.css?inline";
 import CartSvg from "~/components/icons/cart";
+import {CartLink} from "~/components/cartLink/cart-link";
 
 export const useProductLoader = loader$(({ params }) => {
     return products.find((product) => product.id === params.id);
@@ -16,10 +17,7 @@ export default component$(() => {
         <div class="container">
             <section>
                 <div class="cart">
-                    <a class="goToCart" href="/cart">
-                        <CartSvg/>
-                        <div>Go to cart</div>
-                    </a>
+                    <CartLink />
                 </div>
             </section>
             <div class="productContainer">
