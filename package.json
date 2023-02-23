@@ -40,6 +40,8 @@
     "wrangler": "latest"
   },
   "dependencies": {
+    "@auth/core": "^0.4.0",
+    "@builder.io/qwik-auth": "^0.0.2",
     "@builder.io/sdk-qwik": "^0.1.9",
     "zod": "^3.20.6"
   }

@@ -101,7 +101,7 @@ export default component$(() => {
             <table class="cartTable">
               <tbody>
                 {cartSignal.value.map((item) => (
-                  <CartItemCmp item={item} />
+                  <CartItemCmp item={item} key={item.productId} />
                 ))}
               </tbody>
             </table>
