@@ -43,7 +43,7 @@ export default component$(() => {
           />
 
           <div class="login">
-            <button type="submit">Login</button>
+            <button>Login</button>
           </div>
         </div>
       </Form>
