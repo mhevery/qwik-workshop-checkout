@@ -47,16 +47,16 @@ export default component$(() => {
   const filterSignal = useSignal("");
   const productsSignal = useProductsLoader();
   const cartQuantitySignal = useCartQuantityLoader();
-  //const builderContent = useBuilderContentLoader();
+  const builderContent = useBuilderContentLoader();
   return (
     <div>
-      {/*<RenderContent*/}
-      {/*  model="page"*/}
-      {/*  content={builderContent.value}*/}
-      {/*  apiKey={BUILDER_PUBLIC_API_KEY}*/}
-      {/*  // Optional: pass in a custom component registry*/}
-      {/*  customComponents={CUSTOM_COMPONENTS}*/}
-      {/*/>*/}
+      <RenderContent
+        model="page"
+        content={builderContent.value}
+        apiKey={BUILDER_PUBLIC_API_KEY}
+        // Optional: pass in a custom component registry
+        customComponents={CUSTOM_COMPONENTS}
+      />
       <section>
         <input
           placeholder="Search"

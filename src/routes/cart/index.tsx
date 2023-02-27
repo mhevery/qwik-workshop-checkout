@@ -5,6 +5,7 @@ import {
   zod$,
   type Cookie,
   type DocumentHead,
+    useNavigate
 } from "@builder.io/qwik-city";
 import { z } from "zod";
 import { CartItemCmp } from "~/components/cart/cartItem";
@@ -88,6 +89,7 @@ export function updateCartItemsCookie(cookie: Cookie, cartItems: CartItem[]) {
 
 export default component$(() => {
   useStylesScoped$(indexCSS);
+  const navigate = useNavigate();
   const cartSignal = useCartLoader();
   return (
     <div>
@@ -123,7 +125,7 @@ export default component$(() => {
             <div class="total">
               <button
                 onClick$={() => {
-                    window.location.replace("/payment");
+                    navigate('/payment');
                 }}
               >
                 Checkout

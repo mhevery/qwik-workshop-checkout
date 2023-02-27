@@ -1,6 +1,5 @@
 import { component$, useStylesScoped$ } from "@builder.io/qwik";
 import styles from "./header.css?inline";
-import { useLogout } from "~/services/authenticationService";
 import { ActionLink } from "../actionLink/action-link";
 import { useAuthSignout } from "~/routes/plugin@auth";
 
@@ -10,7 +9,6 @@ interface HeaderProps {
 
 export default component$(({ loggedIn } : HeaderProps) => {
   useStylesScoped$(styles);
-  //const logoutAction = useLogout();
   const logoutAction = useAuthSignout();
 
   return (
