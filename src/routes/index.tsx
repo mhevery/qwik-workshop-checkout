@@ -48,6 +48,14 @@ export default component$(() => {
   const productsSignal = useProductsLoader();
   const cartQuantitySignal = useCartQuantityLoader();
   const builderContent = useBuilderContentLoader();
+
+  const predicate = (product: Product) => {
+    if (filterSignal.value == "") return true;
+    return product.name
+        .toLowerCase()
+        .includes(filterSignal.value.toLowerCase());
+  }
+
   return (
     <div>
       <RenderContent
@@ -61,9 +69,9 @@ export default component$(() => {
         <input
           placeholder="Search"
           value={filterSignal.value}
-          onInput$={(e) =>
-            (filterSignal.value = (e.target as HTMLInputElement).value)
-          }
+          onInput$={(e) => {
+            filterSignal.value = (e.target as HTMLInputElement).value;
+          }}
         />
         <div class="cart">
           {`Your cart has ${cartQuantitySignal.value} items`}
@@ -71,7 +79,7 @@ export default component$(() => {
         </div>
       </section>
       <ul>
-        {productsSignal.value.filter(predicate).map((product) => (
+        {productsSignal.value?.filter(predicate).map((product) => (
           <li>
             <ProductCmp
               product={product}
@@ -83,13 +91,6 @@ export default component$(() => {
       </ul>
     </div>
   );
-
-  function predicate(product: Product) {
-    if (filterSignal.value == "") return true;
-    return product.name
-      .toLowerCase()
-      .includes(filterSignal.value.toLowerCase());
-  }
 });
 
 export const head: DocumentHead = {

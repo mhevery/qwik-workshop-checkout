@@ -1,24 +1,20 @@
 import { component$, Slot } from "@builder.io/qwik";
 import Footer from "~/components/footer/footer";
 import Header from "~/components/header/header";
-import {loader$} from "@builder.io/qwik-city";
-import {getAuthenticationFromCookie} from "~/services/authenticationService";
-
-export const useUserLoader = loader$(({ cookie }) => {
-    return getAuthenticationFromCookie(cookie);
-});
+import { useAuthSession } from "~/routes/plugin@auth";
 
 export default component$(() => {
-    const userSignal = useUserLoader();
-  return (
-    <>
-      <main>
-        <Header loggedIn={userSignal.value !== undefined} />
-        <section>
-          <Slot />
-        </section>
-      </main>
-      <Footer />
-    </>
-  );
+    const userSignal = useAuthSession();
+
+    return (
+        <>
+            <main>
+                <Header loggedIn={userSignal.value?.user !== undefined} />
+                <section>
+                    <Slot />
+                </section>
+            </main>
+            <Footer />
+        </>
+    );
 });

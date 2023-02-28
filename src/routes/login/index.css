@@ -1,13 +1,3 @@
-form {
-    border: 3px solid var(--qwik-dark-purple);
-    border-radius: 5px;
-}
-
-/* Add padding to containers */
-.container {
-    padding: 16px;
-}
-
 .login {
     width: 100%;
     display: flex;

@@ -5,7 +5,7 @@ import indexCSS from "./cart-link.css?inline";
 export const CartLink = component$(() => {
     useStylesScoped$(indexCSS);
     return (
-        <a className="goToCart" href="/cart">
+        <a class="goToCart" href="/cart">
             <CartSvg />
             <div>Go to cart</div>
         </a>

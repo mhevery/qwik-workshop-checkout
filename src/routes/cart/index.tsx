@@ -5,6 +5,7 @@ import {
   zod$,
   type Cookie,
   type DocumentHead,
+    useNavigate
 } from "@builder.io/qwik-city";
 import { z } from "zod";
 import { CartItemCmp } from "~/components/cart/cartItem";
@@ -101,7 +102,7 @@ export default component$(() => {
             <table class="cartTable">
               <tbody>
                 {cartSignal.value.map((item) => (
-                  <CartItemCmp item={item} />
+                  <CartItemCmp item={item} key={item.productId} />
                 ))}
               </tbody>
             </table>
@@ -123,7 +124,7 @@ export default component$(() => {
             <div class="total">
               <button
                 onClick$={() => {
-                    window.location.replace("/payment");
+                    window.location.replace('/payment');
                 }}
               >
                 Checkout
