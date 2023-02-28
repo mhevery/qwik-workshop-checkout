@@ -1,10 +1,10 @@
 import { component$, useStylesScoped$ } from "@builder.io/qwik";
 import { Form, useLocation } from "@builder.io/qwik-city";
 import indexCSS from "./index.css?inline";
-import { useAuthSignup } from "~/routes/plugin@auth";
+import { useAuthSignin } from "~/routes/plugin@auth";
 
 export default component$(() => {
-  const loginAction = useAuthSignup();
+  const loginAction = useAuthSignin();
   const location = useLocation();
   useStylesScoped$(indexCSS);
 
@@ -13,7 +13,7 @@ export default component$(() => {
         <div class="container">
           <input
               type="hidden"
-              name="callback-url"
+              name="callbackUrl"
               value={new URL(location.url).searchParams.get("redirect")}
           />
           <input

@@ -89,7 +89,6 @@ export function updateCartItemsCookie(cookie: Cookie, cartItems: CartItem[]) {
 
 export default component$(() => {
   useStylesScoped$(indexCSS);
-  const navigate = useNavigate();
   const cartSignal = useCartLoader();
   return (
     <div>
@@ -125,7 +124,7 @@ export default component$(() => {
             <div class="total">
               <button
                 onClick$={() => {
-                    navigate('/payment');
+                    window.location.replace('/payment');
                 }}
               >
                 Checkout

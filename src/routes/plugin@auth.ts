@@ -9,14 +9,14 @@ export function getAuthenticationFromCookie(cookie: Cookie): string | undefined 
     return authCookie?.value || undefined;
 }
 
-export const { useAuthSignup, useAuthSignout, useAuthSession, onRequest } = serverAuth$(
-    ({ env }) => {
+export const { useAuthSignin, useAuthSignout, useAuthSession, onRequest } = serverAuth$(
+    () => {
         return ({
             secret: import.meta.env.VITE_AUTH_SECRET,
             trustHost: true,
             providers: [
                 CredentialsProvider({
-                    name: 'Email',
+                    name: 'Login',
                     authorize: (credentials) => {
                         if (credentials) {
                             const user = users.get(credentials.username as string);
